@@ -36,6 +36,7 @@ def main():
         ('a', 'apply --recursive -f', None, None),
         ('ak', 'apply -k', None, ['sys']),
         ('k', 'kustomize', None, ['sys']),
+        ('e', 'edit', None, None),
         ('ex', 'exec -i -t', None, None),
         ('lo', 'logs -f', None, None),
         ('lop', 'logs -f -p', None, None),
@@ -48,11 +49,13 @@ def main():
         ]
 
     res = [
-        ('po', 'pods', ['g', 'd', 'rm'], None),
-        ('dep', 'deployment', ['g', 'd', 'rm'], None),
-        ('svc', 'service', ['g', 'd', 'rm'], None),
+        ('p', 'pods', ['g', 'd', 'rm'], None),
+        ('d', 'deployment', ['g', 'e', 'd', 'rm'], None),
+        ('svc', 'service', ['g', 'e', 'd', 'rm'], None),
+        ('vsvc', 'VirtualService', ['g', 'e', 'd', 'rm'], None),
+        ('g', 'Gateway', ['g', 'e', 'd', 'rm'], None),
         ('ing', 'ingress', ['g', 'd', 'rm'], None),
-        ('cm', 'configmap', ['g', 'd', 'rm'], None),
+        ('cm', 'configmap', ['g', 'e', 'd', 'rm'], None),
         ('sec', 'secret', ['g', 'd', 'rm'], None),
         ('no', 'nodes', ['g', 'd'], ['sys']),
         ('ns', 'namespaces', ['g', 'd', 'rm'], ['sys']),
@@ -60,9 +63,9 @@ def main():
     res_types = [r[0] for r in res]
 
     args = [
-        ('oyaml', '-o=yaml', ['g'], ['owide', 'ojson', 'sl']),
-        ('owide', '-o=wide', ['g'], ['oyaml', 'ojson']),
-        ('ojson', '-o=json', ['g'], ['owide', 'oyaml', 'sl']),
+        ('oy', '-o=yaml', ['g'], ['owide', 'ojson', 'sl']),
+        ('ow', '-o=wide', ['g'], ['oyaml', 'ojson']),
+        ('oj', '-o=json', ['g'], ['owide', 'oyaml', 'sl']),
         ('all', '--all-namespaces', ['g', 'd'], ['rm', 'f', 'no', 'sys'
          ]),
         ('sl', '--show-labels', ['g'], ['oyaml', 'ojson']
